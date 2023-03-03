@@ -1,0 +1,7 @@
+FROM postgres:15.2-alpine as twitter_db
+RUN apk add --no-cache tzdata
+ENV TZ="Europe/Moscow"
+ENV POSTGRES_PASSWORD=main
+ENV POSTGRES_USER=main
+ENV POSTGRES_DB=main
+USER postgres

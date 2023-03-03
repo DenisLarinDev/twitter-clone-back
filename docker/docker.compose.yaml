@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  twitter_db:
+    container_name: twitter_db
+    image: 'postgres:15.2-alpine'
+    environment:
+      POSTGRES_PASSWORD: main
+      POSTGRES_DB: main
+      POSTGRES_USER: main
+    ports:
+      - '5433:5432'
+    healthcheck:
+      test: pg_isready -U main -d main
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+        - twitter_network
+
+volumes:
+    twitter_db_data:
+        driver: local
+networks:
+    twitter_network:
+        driver: bridge
