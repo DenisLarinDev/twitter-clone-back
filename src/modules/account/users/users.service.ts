@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersEntity } from './entity/Users.entity';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/createUser.dto';
+import { UserDto } from './dto/user.dto';
 import { v4 as uuidv4 } from 'uuid';
+import { UserInput } from './dto/user.input';
 
 @Injectable()
 export class UsersService {
@@ -13,7 +14,7 @@ export class UsersService {
   ) {}
 
   async getAllUsers() {
-    return this.userRepository.find();
+    return await this.userRepository.find();
   }
 
   async getUserById(id: string) {
@@ -32,7 +33,7 @@ export class UsersService {
     return this.userRepository.findOne({ where: { nickname } });
   }
 
-  async createUser(user: CreateUserDto) {
+  async createUser(user: UserInput) {
     if (!user) throw new Error('User not found');
     let nickName = user?.nickname;
     let candidate: UsersEntity | null = null;

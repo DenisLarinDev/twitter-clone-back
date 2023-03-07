@@ -1,0 +1,43 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  name: String!
+  nickname: String!
+  phone: String!
+  email: String!
+  birthdate: DateTime
+  avatar: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  getAllUsers: [User!]!
+  login(userData: UserLogin!): String!
+}
+
+input UserLogin {
+  email: String
+  phone: String
+  password: String!
+}
+
+type Mutation {
+  registration(userData: UserInput!): User!
+}
+
+input UserInput {
+  name: String!
+  nickname: String!
+  phone: String!
+  email: String!
+  birthdate: DateTime
+  password: String!
+  avatar: String
+}
